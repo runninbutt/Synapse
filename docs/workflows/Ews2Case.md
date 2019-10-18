@@ -13,6 +13,7 @@
     + [Auth Type](#auth-type)
     + [Smtp address](#smtp-address)
     + [Folder name](#folder-name)
+    + [OAuth2 / Modern Authentication](#oauth2-/-modern-authentication)
 + [Additional Set-Up](#additional-set-up)
     + [Categories](#categories)
     + [Exchange web certificate](#exchange-web-certificate)
@@ -179,9 +180,9 @@ password:v3ryC0mplxPwd
 Auth type used in the account config when connecting to EWS.   
 By default, the auth type is set to ```NTLM```. In most of the cases, you do not need to edit this value.   
 
-However, for O365, this field needs to be set to None: ```auth_type:None```.
+However, for O365, this field needs to be set either to None: ```auth_type:None``` for Basic authentication or to OAUTH2: ```auth_type:OAUTH2``` for Modern Authentication.
 
-At the moment, only ```NTLM``` and ```None``` auth type are implemented in Synapse.
+At the moment, only ```NTLM```, ```OAUTH2``` and ```None``` auth type are implemented in Synapse.
 
 #### Example
 
@@ -210,6 +211,19 @@ That way not all emails trigger a case.
 folder_name:TheHive
 ```
 
+### OAuth2 / Modern Authentication
+
+You need to provide ```client_id``` (application ID), ```client_secret``` and ```tenant_id``` for OAuth2 to work. You also need to set auth_type to ```OAUTH2```. You can read more about setting up OAUTH2 and getting the correct parameters to your O365 from [Microsoft's manual](https://docs.microsoft.com/en-us/exchange/client-developer/exchange-web-services/how-to-authenticate-an-ews-application-by-using-oauth).
+
+#### Example
+
+```
+client_id:
+client_secret:
+tenant_id:
+```
+
+
 ## Additional Set-Up
 
 Now the configuration file should be filled in, but you still have to do some actions.
@@ -236,4 +250,4 @@ REQUESTS_CA_BUNDLE=/usr/local/share/ca-certificates/extra/<YOUR_CERT_FILENAME>
 
 ### Special folder
 
-If you have not already done, create a specific folder which Synapse will scan for unread emails.
+If you have not already done, create a specific folder which Synapse will scan for unread emails. You can also use "Inbox".
