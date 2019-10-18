@@ -2,7 +2,8 @@
 # -*- coding: utf8 -*-
 
 import logging
-from exchangelib import DELEGATE, Account, Credentials, Configuration, NTLM
+from exchangelib import DELEGATE, Account, Credentials, OAuth2Credentials, \
+    Configuration, NTLM, OAUTH2
 
 class EwsConnector:
     'Exchange web service connector'
@@ -32,6 +33,17 @@ class EwsConnector:
                 config = Configuration(server=ews_server,
                     credentials=credentials,
                     auth_type=None)
+            #OAuth2 authentication option
+            elif authType == 'OAUTH2':
+                #Queries configuration for OAuth2 specific parameters
+                clientId = self.cfg.get('EWS', 'client_id')
+                clientSecret = self.cfg.get('EWS', 'client_secret')
+                tenantId = self.cfg.get('EWS', 'tenant_id')
+                #Instantiates OAuth2 credentials
+                credentials = OAuth2Credentials(clientId, clientSecret, tenantId)
+                config = Configuration(server=ews_server,
+                    credentials=credentials,
+                    auth_type=OAUTH2)
             else:
                 raise ValueError(authType)
 
