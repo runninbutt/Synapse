@@ -13,7 +13,7 @@
     + [Auth Type](#auth-type)
     + [Smtp address](#smtp-address)
     + [Folder name](#folder-name)
-    + [OAuth2 / Modern Authentication](#oauth2-/-modern-authentication)
+    + [OAuth2 / Modern Authentication](#oauth2--modern-authentication)
 + [Additional Set-Up](#additional-set-up)
     + [Categories](#categories)
     + [Exchange web certificate](#exchange-web-certificate)
@@ -61,8 +61,8 @@ curl synapse.stargazer.org/ews2case
 {"success":true}
 ```
 
-As we can see, the API returned a ```{"sucess":true}```.
-In case it would have been ```{"success":false}```, the logs to troubleshoot the issue are located at ```Synaspe/logs/synapse.log```.
+As we can see, the API returned a ```{"success":true}```.
+In case it would have been ```{"success":false}```, the logs to troubleshoot the issue are located at ```Synapse/logs/synapse.log```.
 
 > In the Stargazer context, Synapse fqdn is ```synapse.stargazer.org```. It will most likely change within **your** organization. The only thing that will not change is ```/ews2case```, this is the API endpoint to execute the EWS workflow.
 
@@ -140,7 +140,7 @@ The configuration is located at ```Synapse/conf/synapse.conf``` and we will fill
 
 ### Exchange server
 
-Under the ```server``` option, fill in the fqdn or the ip of the server you want to pull email from.   
+Under the ```server``` option, fill in the fqdn or the ip of the server you want to pull email from. Office 365 server is outlook.office365.com
 
 #### Example
 
